@@ -48,12 +48,12 @@ jobs:
       uses: appleboy/scp-action@master
       with:
         # ssh remote host
-        host:  ${{ secrets.REMOTE_HOST }}
+        host:  ${{secrets.REMOTE_HOST}}
         # ssh remote user
-        username: ${{ secrets.REMOTE_USER }}
+        username: ${{secrets.REMOTE_USER}}
         # ssh remote port
         port: 22 # optional, default is 22
-        password: ${{ secrets.REMOTE_PASS }}
+        password: ${{secrets.REMOTE_PASS}}
         # content of ssh private key. ex raw content of ~/.ssh/id_rsa
         # key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
         # ssh remote password
@@ -63,17 +63,17 @@ jobs:
         target: "/var/www/html/dani" # optional
         
     - name: SSH Command
-      uses: D3rHase/ssh-command-action@v0.2.1
+      uses: cross-the-world/ssh-pipeline@v1.2.0
       with:
         # hostname / IP of the server
-        HOST: ${{ secrets.REMOTE_HOST }}
+        host: ${{secrets.REMOTE_HOST}}
         # ssh port of the server
-        PORT: 22 # optional, default is 22
+        port: 22 # optional, default is 22
         # user of the server
-        USER: ${{ secrets.REMOTE_USER }}
+        user: ${{secrets.REMOTE_USER}}
         # private ssh key registered on the server
-        PRIVATE_SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        pass: ${{secrets.REMOTE_PASS}}
         # command to be executed
-        COMMAND: chmod 774 /var/www/html/dani/dist # optional 
+        script: chmod 774 /var/www/html/dani/dist # optional 
       
 
