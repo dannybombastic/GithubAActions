@@ -33,8 +33,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-  #  - name: Run tests
-  #    run: npm run test
+    - name: Run tests
+      run: npm run test
 
     - name: Build
       run: npm run build
@@ -62,15 +62,4 @@ jobs:
         # destination to download on server
         target: "/home/ruxx/gitactions" # optional
           
-#    - name: scp manually
- #     run: echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions" | scp -i ~/.ssh/deploy_key -rp dist/
-#    - name: Deploy to Server
-#      uses: easingthemes/ssh-deploy@main
-#      env:
-#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-#          ARGS: "-rqaPH"
-#          SOURCE: "dist/"
-#          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-#          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-#          TARGET: "/home/ruxx/gitactions"
-#          EXCLUDE: "/dist/, /node_modules/"
+
