@@ -74,6 +74,6 @@ jobs:
         # private ssh key registered on the server
         pass: ${{secrets.REMOTE_PASS}}
         # command to be executed
-        script: -R chmod 774 /var/www/html/dani/*; mv /var/www/html/dani/dist/* /var/www/html/dani  # optional 
+        script: chmod -R 774 /var/www/html/dani/*; mv /var/www/html/dani/dist/* /var/www/html/dani  # optional 
       
 
