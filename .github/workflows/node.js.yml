@@ -44,8 +44,8 @@ jobs:
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
           chmod 600 ~/.ssh/deploy_key &&
-    - name: scp
-    - run: scp -i ~/.ssh/deploy_key -rp dist/ | echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions"
+    - name: scp manually
+    - run: echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions" | scp -i ~/.ssh/deploy_key -rp dist/
 #    - name: Deploy to Server
 #      uses: easingthemes/ssh-deploy@main
 #      env:
