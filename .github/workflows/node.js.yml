@@ -39,7 +39,7 @@ jobs:
     - name: Build
       run: |
             npm i -g @angular/cli &&
-            ng build --prod --base-href /dani/ --deploy-url /dani/ 
+            ng build --base-href /dani/ --deploy-url /dani/ 
     - name: Prepare SSH to work with the remote server
       run: |
           cd ~ && mkdir .ssh &&
