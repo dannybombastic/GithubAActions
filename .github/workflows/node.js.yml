@@ -37,7 +37,9 @@ jobs:
 #      run: npm run test
 
     - name: Build
-      run: ng build --prod --base-href /dani/ --deploy-url /dani/
+      run: |
+            npm i -g @angular/cli &&
+            ng build --prod --base-href /dani/ --deploy-url /dani/ 
     - name: Prepare SSH to work with the remote server
       run: |
           cd ~ && mkdir .ssh &&
