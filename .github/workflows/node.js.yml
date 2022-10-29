@@ -43,8 +43,6 @@ jobs:
           cd ~ && mkdir .ssh &&
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/known_hosts
-    - name: cp to remote host
-    - run: scp -i 
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@main
       env:
