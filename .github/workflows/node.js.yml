@@ -1,9 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: Node.js CI Example
 
 on:
   push:
@@ -28,25 +26,27 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14.x
+        node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: npm install
+      run: |
+            npm install &&
+            npm i -g @angular/cli 
 
 #    - name: Run tests
 #      run: npm run test
 
     - name: Build
-      run: |
-            npm i -g @angular/cli &&
-            ng build --base-href /dani/ --deploy-url /dani/ 
+      run: ng build --base-href /dani/ 
+
     - name: Prepare SSH to work with the remote server
       run: |
           cd ~ && mkdir .ssh &&
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
           chmod 600 ~/.ssh/deploy_key 
-    - name: scp-deployer
+
+    - name: copy to remote using sct template
       uses: appleboy/scp-action@master
       with:
         # ssh remote host
@@ -55,16 +55,16 @@ jobs:
         username: ${{secrets.REMOTE_USER}}
         # ssh remote port
         port: 22 # optional, default is 22
+        # ssh remote password
         password: ${{secrets.REMOTE_PASS}}
         # content of ssh private key. ex raw content of ~/.ssh/id_rsa
         # key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
-        # ssh remote password
         # source to copy from
         source: "dist/*" # optional
         # destination to download on server
         target: "/var/www/html/dani" # optional
         
-    - name: SSH Command
+    - name: execute remote command using ssh teemplate
       uses: cross-the-world/ssh-pipeline@v1.2.0
       with:
         # hostname / IP of the server
