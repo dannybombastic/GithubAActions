@@ -46,7 +46,7 @@ jobs:
           chmod 600 ~/.ssh/deploy_key 
           
     - name: scp manually
-    - run: echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions" | scp -i ~/.ssh/deploy_key -rp dist/
+      run: echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions" | scp -i ~/.ssh/deploy_key -rp dist/
 #    - name: Deploy to Server
 #      uses: easingthemes/ssh-deploy@main
 #      env:
