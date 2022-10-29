@@ -44,9 +44,25 @@ jobs:
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
           chmod 600 ~/.ssh/deploy_key 
+    - name: scp-deployer
+      uses: siva1024/scp-deployer@v1.0
+      with:
+        # ssh remote host
+        host:  ${{ secrets.REMOTE_HOST }}
+        # ssh remote user
+        username: ${{ secrets.REMOTE_USER }}
+        # ssh remote port
+        port: 22 # optional, default is 22
+        # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+        key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
+        # ssh remote password
+        # source to copy from
+        source: dist/ # optional
+        # destination to download on server
+        target: /home/ruxx/gitactions # optional
           
-    - name: scp manually
-      run: echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions" | scp -i ~/.ssh/deploy_key -rp dist/
+#    - name: scp manually
+ #     run: echo "${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}}:/home/ruxx/gitactions" | scp -i ~/.ssh/deploy_key -rp dist/
 #    - name: Deploy to Server
 #      uses: easingthemes/ssh-deploy@main
 #      env:
