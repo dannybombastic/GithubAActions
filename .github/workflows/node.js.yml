@@ -44,13 +44,14 @@ jobs:
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rqaPH"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: "/home/ruxx/gitactions"
-          EXCLUDE: "/dist/, /node_modules/"
+          scp -r -i ~/.ssh/deploy_key "${{secrets.REMOTE_USER}}"@"{{secrets.REMOTE_HOST}}:/home/ruxx/gitactions"
+#    - name: Deploy to Server
+#      uses: easingthemes/ssh-deploy@main
+#      env:
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          ARGS: "-rqaPH"
+#          SOURCE: "dist/"
+#          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+#          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+#          TARGET: "/home/ruxx/gitactions"
+#          EXCLUDE: "/dist/, /node_modules/"
