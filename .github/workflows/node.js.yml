@@ -58,8 +58,8 @@ jobs:
         # key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
         # ssh remote password
         # source to copy from
-        source: "dist/" # optional
+        source: "dist/*" # optional
         # destination to download on server
-        target: "/home/ruxx/gitactions" # optional
+        target: "/var/www/html/dani" # optional
           
 
