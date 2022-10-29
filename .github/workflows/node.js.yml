@@ -61,5 +61,19 @@ jobs:
         source: "dist/*" # optional
         # destination to download on server
         target: "/var/www/html/dani" # optional
-          
+        
+    - name: SSH Command
+      uses: D3rHase/ssh-command-action@v0.2.1
+      with:
+        # hostname / IP of the server
+        HOST: ${{ secrets.REMOTE_HOST }}
+        # ssh port of the server
+        PORT: 22 # optional, default is 22
+        # user of the server
+        USER: ${{ secrets.REMOTE_USER }}
+        # private ssh key registered on the server
+        PRIVATE_SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        # command to be executed
+        COMMAND: chmod 774 /var/www/html/dani/dist # optional 
+      
 
