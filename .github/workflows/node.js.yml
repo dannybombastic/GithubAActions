@@ -43,6 +43,7 @@ jobs:
           cd ~ && mkdir .ssh &&
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 0644 ~/.ssh/deploy_key
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@main
       env:
