@@ -53,8 +53,9 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         # ssh remote port
         port: 22 # optional, default is 22
+        password: ${{ REMOTE_PASS }}
         # content of ssh private key. ex raw content of ~/.ssh/id_rsa
-        key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
+        # key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
         # ssh remote password
         # source to copy from
         source: "dist/" # optional
