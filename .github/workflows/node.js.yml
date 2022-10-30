@@ -9,6 +9,8 @@ on:
         - develop
         - main
   pull_request:
+    types:
+       - opened
     branches:
         - main
         - develop
@@ -37,8 +39,8 @@ jobs:
            npm install &&
            npm i -g @angular/cli
 
-#    - name: Run tests
-#      run: npm run test
+    - name: Run tests
+      run: npm run test
 
     - name: Build
       run: ng build --base-href /dani/ --deploy-url /dani/
