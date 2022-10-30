@@ -1,2 +1,2 @@
-# GithubAActions
+# GithubActions
 example node app deploy
