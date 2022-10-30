@@ -6,7 +6,7 @@ name: Node.js CI Deploy  on dev Example
 on:
   pull_request:
     types:
-       - opened
+      - submitted
     branches:
         - develop
 jobs:
