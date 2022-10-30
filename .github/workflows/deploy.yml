@@ -39,6 +39,7 @@ jobs:
       run: ng test --watch false
 
   deploy:
+    runs-on: ubuntu-latest
     needs:test
     steps:
     - name: Checkout
