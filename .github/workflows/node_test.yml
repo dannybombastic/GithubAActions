@@ -46,5 +46,8 @@ jobs:
         # The Chromium version to install and use.
         chromium-version: # optional
 
+    - name: Build
+      run: ng build --base-href /dani/ --deploy-url /dani/
+
     - name: Run tests
       run: ng test
