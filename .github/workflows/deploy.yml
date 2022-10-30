@@ -14,10 +14,34 @@ on:
     branches:
         - main
         - develop
+jobs:
+  test:
+   runs-on: ubuntu-latest
+    environment: dev
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: ng build --base-href /dani/ --deploy-url /dani/
+
+    - name: Run tests
+      run: ng test --watch false
+
 
 jobs:
   deploy:
-    needs: finish
+    needs:test
     runs-on: ubuntu-latest
     environment: dev
     strategy:
