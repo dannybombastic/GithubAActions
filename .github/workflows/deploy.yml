@@ -16,6 +16,7 @@ on:
         - develop
 
 jobs:
+  needs: finish
   build:
 
     runs-on: ubuntu-latest
