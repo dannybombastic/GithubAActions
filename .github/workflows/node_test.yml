@@ -32,7 +32,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
       run: |
@@ -49,7 +49,7 @@ jobs:
       run: ng build --base-href /dani/ --deploy-url /dani/
 
     - name: Run tests
-      run: ng test
+      run: ng test --watch false
 
 
   finish:
