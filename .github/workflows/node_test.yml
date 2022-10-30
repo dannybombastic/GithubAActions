@@ -54,12 +54,18 @@ jobs:
 
   finish:
     needs: build
-    steps:
+     steps:
     - name: notify of failure
-      if: ${{ failure() }}
-        with:
-          text: XXX Build failed - Deploy - Server - TEST - Azure Web Apps CI/CD. XXX
-    - name: notify of success
-        if: ${{ success() }}
+          if: ${{ failure() }}
+          uses: tokorom/action-slack-incoming-webhook@main
+          env:
+            INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          with:
+            text: XXX Build failed - Deploy - Server - TEST - Azure Web Apps CI/CD. XXX
+        - name: notify of success
+          if: ${{ success() }}
+        uses: tokorom/action-slack-incoming-webhook@main
+          env:
+            INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           with:
             text: ":heavy_check_mark: Build success - Deploy -  Server - TEST - Azure Web pps CI/CD. :heavy_check_mark:"
