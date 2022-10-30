@@ -1,4 +1,4 @@
-# GithubAActions
+# GithubActions
 example node app deploy
 
 # enable merge strategy ours
