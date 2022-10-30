@@ -9,11 +9,11 @@ on:
        - feature/*
        - bugfix/*
        - hotfix/*
+       - develop
   pull_request:
     types:
        - opened
     branches:
-        - main
         - develop
 
 jobs:
