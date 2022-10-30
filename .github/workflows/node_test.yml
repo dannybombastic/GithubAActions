@@ -9,7 +9,7 @@ on:
        - feature/*
        - bugfix/*
        - hotfix/*
-   pull_request:
+  pull_request:
     types:
        - opened
     branches:
