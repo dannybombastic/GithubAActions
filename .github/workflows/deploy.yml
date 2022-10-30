@@ -16,8 +16,8 @@ on:
         - develop
 
 jobs:
-  build:
-
+  deploy:
+    needs: finish
     runs-on: ubuntu-latest
     environment: dev
     strategy:
