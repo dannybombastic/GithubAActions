@@ -54,7 +54,7 @@ jobs:
 
   finish:
     needs: build
-     steps:
+    steps:
     - name: notify of failure
         if: ${{ failure() }}
         with:
