@@ -6,9 +6,9 @@ name: Node.js CI Example
 on:
   push:
     branches:
-        - feature/*
-        - bugfix/*
-        - hotfix/*
+       - feature/*
+       - bugfix/*
+       - hotfix/*
    pull_request:
     types:
        - opened
