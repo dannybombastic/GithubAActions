@@ -18,7 +18,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     environment: dev
     strategy:
@@ -51,3 +50,16 @@ jobs:
 
     - name: Run tests
       run: ng test
+
+
+  finish:
+     needs: build
+
+    - name: notify of failure
+          if: ${{ failure() }}
+          with:
+            text: XXX Build failed - Deploy - Server - TEST - Azure Web Apps CI/CD. XXX
+    - name: notify of success
+          if: ${{ success() }}
+          with:
+            text: ":heavy_check_mark: Build success - Deploy -  Server - TEST - Azure Web pps CI/CD. :heavy_check_mark:"
