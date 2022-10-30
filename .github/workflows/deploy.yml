@@ -41,7 +41,7 @@ jobs:
 
 jobs:
   deploy:
-    needs:test
+  needs:test
     runs-on: ubuntu-latest
     environment: dev
     strategy:
