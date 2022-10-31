@@ -39,26 +39,8 @@ jobs:
       run: ng build --base-href /dani/ --deploy-url /dani/
 
     - name: Run tests
-      run: ng test --watch false
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
-      with:
-          name: dist-without-markdown
-          path: |
-            dist
-            !dist/**/*.md
-          retention-days: 5
+      run: ng test --watch false --code-coverage
 
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v3
-      with:
-          name: code-coverage-report
-          path: output/test/code-coverage.html
-
-    - name: Download a single artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: dist-without-markdown
 
   deploy:
     runs-on: ubuntu-latest
