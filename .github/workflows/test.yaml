@@ -42,7 +42,9 @@ jobs:
       uses: browser-actions/setup-chrome@v0.0.0
       with:
         # The Chromium version to install and use.
-        chromium-version: # optional
+        # Google Chrome release channels: stable, beta, dev and canary
+        chromium-version: beta # optional
+    - run: chrome --version
 
     - name: Build
       run: ng build --base-href /dani/ --deploy-url /dani/
