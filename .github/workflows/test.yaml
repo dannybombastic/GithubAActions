@@ -49,3 +49,6 @@ jobs:
 
     - name: Run tests
       run: ng test --watch false --code-coverage
+
+    - name: The job has succeeded
+      if: ${{ success() }}
