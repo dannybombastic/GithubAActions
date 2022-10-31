@@ -4,6 +4,9 @@
 name: Node.js CI Deploy  on dev Example
 
 on:
+  push:
+    branches:
+        - develop
   pull_request:
     types:
       - submitted
