@@ -43,7 +43,7 @@ jobs:
       with:
         # The Chromium version to install and use.
         # Google Chrome release channels: stable, beta, dev and canary
-        chromium-version: beta # optional
+        chromium-version: stable # optional
     - run: chrome --version
 
     - name: Build
