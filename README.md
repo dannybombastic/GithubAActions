@@ -9,4 +9,4 @@
 
 
 ### Publishing Node.js packages
- - [https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages](Publishing Node.js packages)
+ - https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
