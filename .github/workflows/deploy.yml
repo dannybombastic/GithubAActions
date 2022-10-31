@@ -9,7 +9,7 @@ on:
         - main
   pull_request:
     types:
-       - opened
+       - submitted
     branches:
         - main
 
