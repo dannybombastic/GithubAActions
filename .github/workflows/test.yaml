@@ -66,6 +66,18 @@ jobs:
       with:
         name: code-coverage-report
         path: coverage/lcov.info
+    ##
+    # Upload Coverage result to https://app.codecov.io/
+    - name: Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        files: lcov.info # optional
+        directory: /home/runner/work/GithubActions/GithubActions/coverage/artifact
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+        verbose: true # optional (default = false)
 
 
 
@@ -92,18 +104,7 @@ jobs:
 
     - name: Display structure of downloaded files
       run: ls -R artifact/
-    ##
-    # Upload Coverage result to https://app.codecov.io/
-    - name: Coverage
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        files: lcov.info # optional
-        directory: /home/runner/work/GithubActions/GithubActions/coverage/artifact
-        flags: unittests # optional
-        name: codecov-umbrella # optional
-        fail_ci_if_error: true # optional (default = false)
-        verbose: true # optional (default = false)
+
     ##
     # Send a dummy message
     - name: The job has succeeded
