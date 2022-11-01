@@ -7,15 +7,15 @@ on:
   push:
     branches:
         - main
-  pull_request:
+  pull_request_target:
     types:
-       - closed
+      - closed
     branches:
         - main
 
 jobs:
   test:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     environment: dev
     strategy:

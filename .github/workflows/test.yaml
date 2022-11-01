@@ -11,7 +11,7 @@ on:
        - hotfix/*
   pull_request:
     types:
-       - closed
+       - opened
     branches:
         - develop
 
