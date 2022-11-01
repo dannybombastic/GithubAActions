@@ -96,11 +96,6 @@ jobs:
       with:
           name: dist-without-markdown
           path: artifact/
-    - name: Download covertura
-      uses: actions/download-artifact@v3
-      with:
-          name: code-coverage-report
-          path: artifact/
 
     - name: Display structure of downloaded files
       run: ls -R artifact/
