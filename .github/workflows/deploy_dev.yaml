@@ -40,7 +40,14 @@ jobs:
     - name: Run tests
       run: ng test --watch false --code-coverage
 
-
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+          name: dist-without-markdown
+          path: |
+            dist
+            !dist/**/*.md
+          retention-days: 5
   deploy:
     runs-on: ubuntu-latest
     environment: dev
@@ -51,25 +58,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
+    - name : Create workspace
+      run: mkdir artifact
+
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        name: dist-without-markdown
+        path: artifact/
 
-    - name: Install dependencies
-      run: |
-           npm install &&
-           npm i -g @angular/cli
+    - name: Display structure of downloaded files
+      run: ls -R artifact/
 
-    - name: Build
-      run: ng build --base-href /dani/ --deploy-url /dani/
-
-    - name: Prepare SSH to work with the remote server Dev
-      run: |
-          cd ~ && mkdir .ssh &&
-          touch ~/.ssh/known_hosts &&
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
-          chmod 600 ~/.ssh/deploy_key
 
     - name: Copy to remote using scp template
       uses: appleboy/scp-action@master
@@ -85,7 +85,7 @@ jobs:
         # content of ssh private key. ex raw content of ~/.ssh/id_rsa
         # key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
         # source to copy from
-        source: "dist/*" # optional
+        source: "artifact/dist/*" # optional
         # destination to download on server
         target: "/var/www/html/dani" # optional
 

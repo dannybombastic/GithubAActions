@@ -50,15 +50,14 @@ jobs:
     # Run test & Coverage
     - name: Run tests
       run: ng test --watch false --code-coverage
-    ##
-    # Storing artifacts upload
+
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
           name: dist-without-markdown
           path: |
-            dist
-            !dist/**/*.md
+            /home/runner/work/GithubActions/GithubActions/dist
+            !/home/runner/work/GithubActions/GithubActions/dist/**/*.md
           retention-days: 5
     ##
     # Storing artifacts Coverage upload
@@ -68,28 +67,39 @@ jobs:
         name: code-coverage-report
         path: coverage/lcov.info
     ##
-    # Download artifacts
-    - name: Clean workspace
-      run: mkdir artifact
-    - name: Download a single artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: dist-without-markdown
-        path: artifact/
-    - name: Display structure of downloaded files
-      run: ls -R artifact/
-    ##
     # Upload Coverage result to https://app.codecov.io/
     - name: Coverage
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
         files: lcov.info # optional
-        directory: /home/runner/work/GithubActions/GithubActions/coverage/
+        directory: /home/runner/work/GithubActions/GithubActions/coverage
         flags: unittests # optional
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
         verbose: true # optional (default = false)
+
+
+
+  artifact:
+    needs: build-test
+    runs-on: ubuntu-latest
+    environment: dev
+
+    ##
+    # Download artifacts
+    steps:
+    - name: Clean workspace
+      run: mkdir artifact
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+          name: dist-without-markdown
+          path: artifact/
+
+    - name: Display structure of downloaded files
+      run: ls -R artifact/
+
     ##
     # Send a dummy message
     - name: The job has succeeded
