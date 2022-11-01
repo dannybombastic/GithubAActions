@@ -45,8 +45,8 @@ jobs:
       with:
           name: dist-without-markdown
           path: |
-            dist
-            !dist/**/*.md
+            /home/runner/work/GithubActions/GithubActions/dist
+            !/home/runner/work/GithubActions/GithubActions/dist/**/*.md
           retention-days: 5
 
   deploy:
