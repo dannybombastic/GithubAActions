@@ -11,12 +11,13 @@ on:
     types:
       - submitted
   pull_request:
+    types:
+      - opened
     branches:
         - develop
 
 jobs:
   test:
-    if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     environment: dev
     strategy:
