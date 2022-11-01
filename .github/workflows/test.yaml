@@ -65,14 +65,14 @@ jobs:
         path: coverage/lcov.info
     #Download
     - name: Clean workspace
-      run: mkdir artefacto
+      run: mkdir artifact
     - name: Download a single artifact
       uses: actions/download-artifact@v3
       with:
         name: dist-without-markdown
-        path: artefacto/
+        path: artifact/
     - name: Display structure of downloaded files
-      run: ls -R artefacto/
+      run: ls -R artifact/
 
     - name: Coverage
       uses: codecov/codecov-action@v3
