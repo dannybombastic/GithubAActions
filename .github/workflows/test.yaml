@@ -73,7 +73,7 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
         files: lcov.info # optional
-        directory: /home/runner/work/GithubActions/GithubActions/coverage/artifact
+        directory: /home/runner/work/GithubActions/GithubActions/coverage
         flags: unittests # optional
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
