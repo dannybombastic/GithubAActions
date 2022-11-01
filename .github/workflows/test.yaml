@@ -4,11 +4,6 @@
 name: Node.js CI test Example
 
 on:
-  push:
-    branches:
-       - feature/*
-       - bugfix/*
-       - hotfix/*
   pull_request:
     types:
        - opened
