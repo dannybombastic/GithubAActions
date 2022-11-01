@@ -43,8 +43,8 @@ jobs:
       run: |
            npm install &&
            npm i -g @angular/cli
-     ## The Chromium version to install and use.
-     # Google Chrome release channels: stable, beta, dev and canary
+    ## The Chromium version to install and use.
+    # Google Chrome release channels: stable, beta, dev and canary
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v0.0.0
       with:
