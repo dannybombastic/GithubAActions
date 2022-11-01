@@ -45,8 +45,8 @@ jobs:
       with:
           name: dist-without-markdown
           path: |
-            dist
-            !dist/**/*.md
+            /home/runner/work/GithubActions/GithubActions/dist
+            !/home/runner/work/GithubActions/GithubActions/dist/**/*.md
           retention-days: 5
 
   deploy:
@@ -82,7 +82,7 @@ jobs:
         # content of ssh private key. ex raw content of ~/.ssh/id_rsa
         # key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
         # source to copy from
-        source: "artifact/dist/*" # optional
+        source: "/home/runner/work/GithubActions/GithubActions/artifact/*" # optional
         # destination to download on server
         target: "/var/www/html/dani" # optional
 
