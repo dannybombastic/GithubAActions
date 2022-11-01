@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI Deploy  on dev Example
+name: Node.js CI Deploy on Dev Example
 
 on:
   push:
@@ -63,14 +63,14 @@ jobs:
     - name: Build
       run: ng build --base-href /dani/ --deploy-url /dani/
 
-    - name: Prepare SSH to work with the remote server
+    - name: Prepare SSH to work with the remote server Dev
       run: |
           cd ~ && mkdir .ssh &&
           touch ~/.ssh/known_hosts &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
           chmod 600 ~/.ssh/deploy_key
 
-    - name: Copy to remote using sct template
+    - name: Copy to remote using scp template
       uses: appleboy/scp-action@master
       with:
         # ssh remote host
