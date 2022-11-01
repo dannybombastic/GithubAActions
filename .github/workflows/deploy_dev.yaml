@@ -7,12 +7,15 @@ on:
   push:
     branches:
         - develop
-  pull_request:
+  pull_request_review:
     types:
       - submitted
+  pull_request:
     branches:
         - develop
+
 jobs:
+  if: github.event.pull_request.merged == true
   test:
     runs-on: ubuntu-latest
     environment: dev
@@ -46,6 +49,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: test
+    if: ${{ success() }}
+    #[build,test]
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -71,7 +76,6 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
 
     - name: Copy to remote using scp template
-      if: ${{ test.success() }}
       uses: appleboy/scp-action@master
       with:
         # ssh remote host
@@ -90,7 +94,6 @@ jobs:
         target: "/var/www/html/dani" # optional
 
     - name: Execute remote command using ssh template
-      if: ${{ test.success() }}
       uses: cross-the-world/ssh-pipeline@v1.2.0
       with:
         # hostname / IP of the server

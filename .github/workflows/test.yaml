@@ -9,6 +9,9 @@ on:
        - feature/*
        - bugfix/*
        - hotfix/*
+  pull_request_review:
+    types:
+      - submitted
   pull_request:
     types:
        - opened
@@ -25,31 +28,38 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    ##
+    # Uses Checkout
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    ##
+    #  Use Node.js ${{ matrix.node-version }}
+    - name: Use Node
       uses: actions/setup-node@v3
       with:
           node-version: ${{ matrix.node-version }}
-
+    ##
+    # install all Js dependencies
     - name: Install dependencies
       run: |
            npm install &&
            npm i -g @angular/cli
-
+     ## The Chromium version to install and use.
+     # Google Chrome release channels: stable, beta, dev and canary
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v0.0.0
       with:
-        # The Chromium version to install and use.
-        # Google Chrome release channels: stable, beta, dev and canary
         chromium-version:  # optional
     - run: chrome --version
-
+    ##
+    # Build the project
     - name: Build
       run: ng build --base-href /dani/ --deploy-url /dani/
-
+    ##
+    # Run test & Coverage
     - name: Run tests
       run: ng test --watch false --code-coverage
-
+    ##
+    # Storing artifacts upload
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -58,7 +68,26 @@ jobs:
             dist
             !dist/**/*.md
           retention-days: 5
-
+    ##
+    # Storing artifacts Coverage upload
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: coverage/lcov.info
+    ##
+    # Download artifacts
+    - name: Clean workspace
+      run: mkdir artifact
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: dist-without-markdown
+        path: artifact/
+    - name: Display structure of downloaded files
+      run: ls -R artifact/
+    ##
+    # Upload Coverage result to https://app.codecov.io/
     - name: Coverage
       uses: codecov/codecov-action@v3
       with:
@@ -69,12 +98,8 @@ jobs:
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
         verbose: true # optional (default = false)
-
-    - name: Download a single artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: dist-without-markdown
-
+    ##
+    # Send a dummy message
     - name: The job has succeeded
       if: ${{ success() }}
       run: echo "success !!"

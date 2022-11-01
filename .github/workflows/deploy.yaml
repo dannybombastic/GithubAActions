@@ -7,13 +7,15 @@ on:
   push:
     branches:
         - main
-  pull_request:
+  pull_request_review:
     types:
        - submitted
+  pull_request:
     branches:
         - main
 
 jobs:
+  if: github.event.pull_request.merged == true
   test:
     runs-on: ubuntu-latest
     environment: dev
@@ -46,6 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: test
+    #[build,test]
+    if: ${{ success() }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
