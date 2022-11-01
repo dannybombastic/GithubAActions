@@ -7,12 +7,9 @@ on:
   push:
     branches:
         - develop
-  pull_request_review:
-    types:
-      - submitted
   pull_request:
     types:
-      - opened
+      - closed
     branches:
         - develop
 
