@@ -39,7 +39,8 @@ jobs:
       run: ng build --base-href /dani/ --deploy-url /dani/
 
     - name: Run tests
-      run: ng test --watch false
+      run: ng test --watch false --code-coverage
+
 
   deploy:
     runs-on: ubuntu-latest
