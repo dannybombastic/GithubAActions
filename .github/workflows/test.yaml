@@ -50,8 +50,16 @@ jobs:
     # Run test & Coverage
     - name: Run tests
       run: ng test --watch false --code-coverage
+
+
+
+  artifact:
+    needs: build-test
+    runs-on: ubuntu-latest
+    environment: dev
     ##
     # Storing artifacts upload
+    steps:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
