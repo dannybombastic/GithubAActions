@@ -71,7 +71,7 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
 
     - name: Copy to remote using scp template
-      if: ${{ test.success() }}
+      if: ${{ jobs.test.success() }}
       uses: appleboy/scp-action@master
       with:
         # ssh remote host
@@ -90,7 +90,7 @@ jobs:
         target: "/var/www/html/dani" # optional
 
     - name: Execute remote command using ssh template
-      if: ${{ test.success() }}
+      if: ${{ jobs.test.success() }}
       uses: cross-the-world/ssh-pipeline@v1.2.0
       with:
         # hostname / IP of the server
