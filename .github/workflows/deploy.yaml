@@ -16,7 +16,7 @@ on:
 
 jobs:
   test:
-    if: github.event.pull_request.merged
+    if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     environment: dev
     strategy:
