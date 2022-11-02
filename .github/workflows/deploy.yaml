@@ -35,7 +35,7 @@ jobs:
            npm i -g @angular/cli
 
     - name: Build
-      run: ng build --base-href /dani/ --deploy-url /dani/
+      run: ng build --base-href /prod/ --deploy-url /prod/
 
     - name: Run tests
       run: ng test --watch false --code-coverage
