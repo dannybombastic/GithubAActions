@@ -84,7 +84,7 @@ jobs:
         # source to copy from
         source: "/home/runner/work/GithubActions/GithubActions/artifact/*" # optional
         # destination to download on server
-        target: "/var/www/html/dani" # optional
+        target: ${{secrets.REMOTE_TARGET}} # optional
 
     - name: Execute remote command using ssh template
       uses: cross-the-world/ssh-pipeline@v1.2.0
@@ -98,4 +98,4 @@ jobs:
         # private ssh key registered on the server
         pass: ${{secrets.REMOTE_PASS}}
         # command to be executed
-        script: chmod -R 774 /var/www/html/dani/*; cp -r /var/www/html/dani/dist/* /var/www/html/dani ; chown -R www-data:www-data /var/www/html/*  # optional
+        script: chmod -R 774 ${{secrets.REMOTE_TARGET}}/*; cp -r ${{secrets.REMOTE_TARGET}}/dist/* ${{secrets.REMOTE_TARGET}} ; chown -R www-data:www-data /var/www/html/*  # optional
