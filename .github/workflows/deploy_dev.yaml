@@ -101,4 +101,4 @@ jobs:
         # private ssh key registered on the server
         pass: ${{secrets.REMOTE_PASS}}
         # command to be executed
-        script: chmod -R 774 ${{secrets.REMOTE_TARGET}}/*; cp -r ${{secrets.REMOTE_TARGET}}/dist/* ${{secrets.REMOTE_TARGET}} ; chown -R www-data:www-data /var/www/html/*  # optional
+        script: cp -r ${{secrets.REMOTE_TARGET}}/github/workspace/artifact/* ${{secrets.REMOTE_TARGET}} ; chmod -R 774 ${{secrets.REMOTE_TARGET}}/*; chown -R www-data:www-data /var/www/html/*  # optional
