@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styles: ['h1 { color: green; font-size: 350%}']
 })
 export class BannerComponent {
-  title = 'Test Tour of Heroes';
+  title = 'Test Tour of Heroes 2022';
 }
